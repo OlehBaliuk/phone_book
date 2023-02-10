@@ -2,8 +2,13 @@
     <div>
         <form @submit.prevent="submit" class="form">
             <div class="input-container">
-                <input v-model="value.name" type="text" placeholder="name.." class="input" />
-                <input v-model="value.phoneNumber" type="number" placeholder="phone number.." class="input" />
+                <Input @update:value="updateName" :value="value.name" type="text" placeholder="name.." />
+                <Input
+                    @update:value="updatePhoneNumber"
+                    :value="value.phoneNumber"
+                    type="text"
+                    placeholder="phone number.."
+                />
             </div>
             <button type="submit" class="button">Save</button>
             <button type="button" @click="onCloseModal()" class="button">Close</button>
@@ -12,8 +17,14 @@
 </template>
 
 <script>
+import Input from '@/components/sharedComponents/Input.vue';
+
 export default {
     name: 'Form',
+
+    components: {
+        Input,
+    },
 
     props: {
         value: {
@@ -39,6 +50,14 @@ export default {
                 this.$router.push({ path: '/' });
             }
         },
+
+        updateName(value) {
+            this.value.name = value;
+        },
+
+        updatePhoneNumber(value) {
+            this.value.phoneNumber = value;
+        },
     },
 };
 </script>
@@ -47,16 +66,6 @@ export default {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-}
-
-.input {
-    height: 30px;
-    border-radius: 5px;
-    margin: 5px;
-    outline: 0;
-    background-color: #f5f5f5;
-    border-color: #bdbdbd;
-    opacity: 1;
 }
 
 .input-container {
