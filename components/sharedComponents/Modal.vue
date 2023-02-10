@@ -1,6 +1,6 @@
 <template>
-    <div :class="[getStatusCreateModal ? 'modal active' : 'modal']">
-        <div :class="[getStatusCreateModal ? 'modal__content active' : 'modal__content']" @click.stop>
+    <div :class="[getStatusModal ? 'modal active' : 'modal']">
+        <div :class="[getStatusModal ? 'modal__content active' : 'modal__content']" @click.stop>
             <slot></slot>
         </div>
     </div>
@@ -15,8 +15,8 @@ export default {
     },
 
     computed: {
-        getStatusCreateModal() {
-            return this.$store.getters['statusCreateModal'];
+        getStatusModal() {
+            return this.$store.getters['modalStatus'];
         },
     },
 };

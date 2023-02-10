@@ -25,6 +25,8 @@ export default {
     methods: {
         editContact() {
             this.$router.push({ query: { name: this.name, phoneNumber: this.phoneNumber } });
+            this.$store.dispatch('onChangeStatusModal');
+            this.$store.commit('showEditContactForm');
         },
     },
 };

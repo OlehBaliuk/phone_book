@@ -2,8 +2,8 @@
     <div>
         <form @submit.prevent="onSubmit" class="form">
             <div class="input-container">
-                <input v-model="name" type="text" placeholder="name.." class="input" />
-                <input v-model="phoneNumber" type="number" placeholder="phone number.." class="input" />
+                <input v-model="value.name" type="text" placeholder="name.." class="input" />
+                <input v-model="value.phoneNumber" type="number" placeholder="phone number.." class="input" />
             </div>
             <button type="submit" class="button">Save</button>
             <button type="button" @click="onCloseModal()" class="button">Close</button>
@@ -15,30 +15,29 @@
 export default {
     name: 'Form',
 
-    data() {
-        return {
-            name: '',
-            phoneNumber: '',
-        };
+    props: {
+        value: {
+            type: Object,
+            default: function () {
+                return {};
+            },
+        },
     },
 
     methods: {
         onCloseModal() {
-            this.$store.dispatch('onChangeStatusCreateModal');
-            this.clearData();
+            this.$store.dispatch('onChangeStatusModal');
+            this.$store.commit('hideModalForm');
+            this.$router.push({ path: '/' });
         },
 
         onSubmit() {
-            if (this.name && this.phoneNumber) {
+            if (this.value.name && this.value.phoneNumber) {
                 this.$emit('submit', { name: this.name, phoneNumber: Number(this.phoneNumber) });
-                this.$store.dispatch('onChangeStatusCreateModal');
-                this.clearData();
+                this.$store.dispatch('onChangeStatusModal');
+                this.$store.commit('hideModalForm');
+                this.$router.push({ path: '/' });
             }
-        },
-
-        clearData() {
-            this.name = '';
-            this.phoneNumber = '';
         },
     },
 };
