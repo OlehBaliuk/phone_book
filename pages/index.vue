@@ -14,7 +14,7 @@
 
 <script>
 import Header from '@/components/Header.vue';
-import CreateContact from '~/components/CreateContact.vue';
+import CreateContact from '@/components/CreateContact.vue';
 import ContactsList from '@/components/contactsList/ContactsList.vue';
 import Modal from '@/components/sharedComponents/Modal.vue';
 import EditContact from '@/components/EditContact.vue';

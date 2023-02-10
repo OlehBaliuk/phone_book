@@ -1,5 +1,6 @@
 <template>
     <div class="contacts-list">
+        <h1 class="title">My contacts</h1>
         <ContactItem
             v-for="contact in contacts"
             :key="contact.id"
@@ -28,4 +29,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.title {
+    margin: 10px;
+}
+</style>
