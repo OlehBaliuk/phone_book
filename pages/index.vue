@@ -1,54 +1,19 @@
 <template>
-    <div class="container">
-        <Header />
-        <main class="main">
-            <ContactsList />
-            <Modal>
-                <CreateContact v-if="getCreateContactStatus" />
-                <EditContact v-if="getEditContactStatus" />
-            </Modal>
-            <button class="button" @click="onOpenCreateModal()">Create contact</button>
-        </main>
-    </div>
+    <MainPage />
 </template>
 
 <script>
-import Header from '@/components/Header.vue';
-import CreateContact from '@/components/CreateContact.vue';
-import ContactsList from '@/components/contactsList/ContactsList.vue';
-import Modal from '@/components/sharedComponents/Modal.vue';
-import EditContact from '@/components/EditContact.vue';
+import MainPage from '@/components/MainPage.vue';
 
 export default {
     name: 'IndexPage',
 
     components: {
-        Header,
-        CreateContact,
-        ContactsList,
-        Modal,
-        EditContact,
+        MainPage,
     },
 
     async fetch({ store }) {
         await store.dispatch('getContacts');
-    },
-
-    methods: {
-        onOpenCreateModal() {
-            this.$store.dispatch('onChangeStatusModal');
-            this.$store.commit('showCreateContactForm');
-        },
-    },
-
-    computed: {
-        getEditContactStatus() {
-            return this.$store.getters['editContactStatus'];
-        },
-
-        getCreateContactStatus() {
-            return this.$store.getters['createContactStatus'];
-        },
     },
 };
 </script>
@@ -68,9 +33,5 @@ export default {
     &:hover {
         cursor: pointer;
     }
-}
-
-.main {
-    text-align: center;
 }
 </style>
