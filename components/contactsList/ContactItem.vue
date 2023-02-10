@@ -7,7 +7,7 @@
             </div>
             <div class="contact-action-container">
                 <button @click="editContact()" class="button">edit</button>
-                <button class="button">delete</button>
+                <button @click="deleteContact()" class="button">delete</button>
             </div>
         </div>
     </div>
@@ -20,13 +20,23 @@ export default {
     props: {
         name: String,
         phoneNumber: Number,
+        id: String,
     },
 
     methods: {
         editContact() {
-            this.$router.push({ query: { name: this.name, phoneNumber: this.phoneNumber } });
+            this.$router.push({ query: { name: this.name, phoneNumber: this.phoneNumber, id: this.id } });
             this.$store.dispatch('onChangeStatusModal');
             this.$store.commit('showEditContactForm');
+        },
+
+        async deleteContact() {
+            try {
+                await this.$axios.$delete(`contacts/${this.id}`);
+                this.$store.dispatch('getContacts');
+            } catch (error) {
+                console.log(error);
+            }
         },
     },
 };

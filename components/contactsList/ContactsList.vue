@@ -5,6 +5,7 @@
             :key="contact.id"
             :name="contact.name"
             :phoneNumber="contact.phoneNumber"
+            :id="contact.id"
         />
     </div>
 </template>

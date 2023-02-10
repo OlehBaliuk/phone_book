@@ -52,7 +52,11 @@ export const actions = {
     },
 
     async getContacts({ commit }) {
-        const contacts = await this.$axios.$get('contacts');
-        commit('setContacts', contacts);
+        try {
+            const contacts = await this.$axios.$get('contacts');
+            commit('setContacts', contacts);
+        } catch (error) {
+            console.log(error);
+        }
     },
 };

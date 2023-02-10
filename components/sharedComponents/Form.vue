@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="onSubmit" class="form">
+        <form @submit.prevent="submit" class="form">
             <div class="input-container">
                 <input v-model="value.name" type="text" placeholder="name.." class="input" />
                 <input v-model="value.phoneNumber" type="number" placeholder="phone number.." class="input" />
@@ -31,9 +31,9 @@ export default {
             this.$router.push({ path: '/' });
         },
 
-        onSubmit() {
+        submit() {
             if (this.value.name && this.value.phoneNumber) {
-                this.$emit('submit', { name: this.name, phoneNumber: Number(this.phoneNumber) });
+                this.$emit('onSubmit');
                 this.$store.dispatch('onChangeStatusModal');
                 this.$store.commit('hideModalForm');
                 this.$router.push({ path: '/' });

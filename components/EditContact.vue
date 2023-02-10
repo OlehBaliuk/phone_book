@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <p class="title">Edit contact</p>
-        <Form v-model="data" />
+        <Form v-model="data" @onSubmit="submit" />
     </div>
 </template>
 
@@ -29,6 +29,21 @@ export default {
             const query = this.$route.query;
             this.data.name = query.name;
             this.data.phoneNumber = query.phoneNumber;
+        },
+    },
+
+    methods: {
+        async submit() {
+            try {
+                const params = {
+                    name: this.data.name,
+                    phoneNumber: Number(this.data.phoneNumber),
+                };
+                await this.$axios.$put(`contacts/${this.$route.query.id}`, params);
+                await this.$store.dispatch('getContacts');
+            } catch (error) {
+                console.log(error);
+            }
         },
     },
 };

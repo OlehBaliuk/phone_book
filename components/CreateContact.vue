@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <p class="title">Create contact</p>
-        <Form v-model="data" />
+        <Form v-model="data" @onSubmit="submit" />
     </div>
 </template>
 
@@ -22,6 +22,21 @@ export default {
                 phoneNumber: '',
             },
         };
+    },
+
+    methods: {
+        async submit() {
+            try {
+                const params = {
+                    name: this.data.name,
+                    phoneNumber: Number(this.data.phoneNumber),
+                };
+                await this.$axios.$post('contacts', params);
+                this.$store.dispatch('getContacts');
+            } catch (error) {
+                console.log(error);
+            }
+        },
     },
 };
 </script>
