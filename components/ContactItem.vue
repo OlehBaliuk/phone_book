@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import API_ROUTES from '../constants/apiRoutes';
+
 export default {
     name: 'ContactItem',
 
@@ -32,7 +34,7 @@ export default {
 
         async deleteContact() {
             try {
-                await this.$axios.$delete(`contacts/${this.id}`);
+                await this.$axios.$delete(`${API_ROUTES.contacts}/${this.id}`);
                 this.$store.dispatch('getContacts');
             } catch (error) {
                 console.log(error);
@@ -46,7 +48,7 @@ export default {
 .contact-item {
     display: flex;
     justify-content: space-between;
-    width: 30%;
+    width: 600px;
     margin: 10px auto;
     background-color: #d5d2d2;
     padding: 5px;

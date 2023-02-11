@@ -2,7 +2,9 @@
     <div class="container">
         <Header />
         <main class="main">
-            <ContactsList />
+            <h1 class="title">My contacts</h1>
+            <SearchContacts @onSearchInput="inputSearch" />
+            <ContactsList :searchList="getSearchList" />
             <Modal>
                 <CreateContact v-if="getCreateContactStatus" />
                 <EditContact v-if="getEditContactStatus" />
@@ -18,6 +20,7 @@ import CreateContact from '@/components/CreateContact.vue';
 import ContactsList from '~/components/ContactsList.vue';
 import Modal from '@/components/sharedComponents/Modal.vue';
 import EditContact from '@/components/EditContact.vue';
+import SearchContacts from '@/components/SearchContacts.vue';
 
 export default {
     name: 'MainPage',
@@ -28,12 +31,23 @@ export default {
         ContactsList,
         Modal,
         EditContact,
+        SearchContacts,
+    },
+
+    data() {
+        return {
+            searchList: [],
+        };
     },
 
     methods: {
         onOpenCreateModal() {
             this.$store.dispatch('onChangeStatusModal');
             this.$store.commit('showCreateContactForm');
+        },
+
+        inputSearch(value) {
+            this.searchList = value;
         },
     },
 
@@ -45,6 +59,14 @@ export default {
         getCreateContactStatus() {
             return this.$store.getters['createContactStatus'];
         },
+
+        contacts() {
+            return this.$store.getters['contacts'];
+        },
+
+        getSearchList() {
+            return this.searchList;
+        },
     },
 };
 </script>
@@ -52,5 +74,9 @@ export default {
 <style lang="scss">
 .main {
     text-align: center;
+}
+
+.title {
+    margin: 10px;
 }
 </style>

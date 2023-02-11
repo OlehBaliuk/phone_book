@@ -1,13 +1,15 @@
 <template>
     <div class="contacts-list">
-        <h1 class="title">My contacts</h1>
-        <ContactItem
-            v-for="contact in contacts"
-            :key="contact.id"
-            :name="contact.name"
-            :phoneNumber="contact.phoneNumber"
-            :id="contact.id"
-        />
+        <p v-if="isShowNoMatchResult">no matching result</p>
+        <template v-else>
+            <ContactItem
+                v-for="contact in contacts"
+                :key="contact.id"
+                :name="contact.name"
+                :phoneNumber="contact.phoneNumber"
+                :id="contact.id"
+            />
+        </template>
     </div>
 </template>
 
@@ -23,14 +25,20 @@ export default {
 
     computed: {
         contacts() {
-            return this.$store.getters['contacts'];
+            return this.searchList.length ? this.searchList : this.$store.getters['contacts'];
         },
+
+        getSearchModeStatus() {
+            return this.$store.getters['searchModeStatus'];
+        },
+
+        isShowNoMatchResult() {
+            return this.getSearchModeStatus && !this.searchList.length;
+        },
+    },
+
+    props: {
+        searchList: Array,
     },
 };
 </script>
-
-<style lang="scss" scoped>
-.title {
-    margin: 10px;
-}
-</style>

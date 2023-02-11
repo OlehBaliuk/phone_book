@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <input
-            :value="value"
-            @input="$emit('update:value', $event.target.value)"
-            :type="type"
-            :placeholder="placeholder"
-            class="input"
-        />
-    </div>
+    <input
+        :value="value"
+        @input="$emit('update:value', $event.target.value)"
+        :type="type"
+        :placeholder="placeholder"
+        class="input search-input"
+    />
 </template>
 
 <script>
@@ -27,6 +25,7 @@ export default {
     height: 30px;
     border-radius: 5px;
     margin: 5px;
+    padding: 0 5px;
     outline: 0;
     background-color: #f5f5f5;
     border-color: #bdbdbd;

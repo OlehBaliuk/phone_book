@@ -7,6 +7,7 @@
 
 <script>
 import Form from './sharedComponents/Form.vue';
+import API_ROUTES from '@/constants/apiRoutes';
 
 export default {
     name: 'EditContact',
@@ -39,7 +40,7 @@ export default {
                     name: this.data.name,
                     phoneNumber: Number(this.data.phoneNumber),
                 };
-                await this.$axios.$put(`contacts/${this.$route.query.id}`, params);
+                await this.$axios.$put(`${API_ROUTES.contacts}/${this.$route.query.id}`, params);
                 await this.$store.dispatch('getContacts');
             } catch (error) {
                 console.log(error);

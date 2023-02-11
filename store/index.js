@@ -1,8 +1,11 @@
+import API_ROUTES from '@/constants/apiRoutes';
+
 export const state = () => ({
     isActiveCreateModal: false,
     contacts: [],
     isEditContact: false,
     isCreateContact: false,
+    isSearchMode: false,
 });
 
 export const getters = {
@@ -20,6 +23,10 @@ export const getters = {
 
     createContactStatus(state) {
         return state.isCreateContact;
+    },
+
+    searchModeStatus(state) {
+        return state.isSearchMode;
     },
 };
 
@@ -44,6 +51,14 @@ export const mutations = {
         state.isCreateContact = false;
         state.isEditContact = false;
     },
+
+    switchOnSearchMode(state) {
+        state.isSearchMode = true;
+    },
+
+    switchOffSearchMode(state) {
+        state.isSearchMode = false;
+    },
 };
 
 export const actions = {
@@ -53,7 +68,7 @@ export const actions = {
 
     async getContacts({ commit }) {
         try {
-            const contacts = await this.$axios.$get('contacts');
+            const contacts = await this.$axios.$get(API_ROUTES.contacts);
             commit('setContacts', contacts);
         } catch (error) {
             console.log(error);

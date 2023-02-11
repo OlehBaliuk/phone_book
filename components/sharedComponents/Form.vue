@@ -6,7 +6,7 @@
                 <Input
                     @update:value="updatePhoneNumber"
                     :value="value.phoneNumber"
-                    type="text"
+                    type="number"
                     placeholder="phone number.."
                 />
             </div>
