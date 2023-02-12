@@ -59,6 +59,14 @@ export const mutations = {
     switchOffSearchMode(state) {
         state.isSearchMode = false;
     },
+
+    sortAsc(state) {
+        state.contacts.sort((prev, next) => prev.createdAt - next.createdAt);
+    },
+
+    sortDesc(state) {
+        state.contacts.sort((prev, next) => next.createdAt - prev.createdAt);
+    },
 };
 
 export const actions = {

@@ -4,6 +4,7 @@
         <main class="main">
             <h1 class="title">My contacts</h1>
             <SearchContacts @onSearchInput="inputSearch" />
+            <SortContacts />
             <ContactsList :searchList="getSearchList" />
             <Modal>
                 <CreateContact v-if="getCreateContactStatus" />
@@ -18,9 +19,10 @@
 import Header from '@/components/Header.vue';
 import CreateContact from '@/components/CreateContact.vue';
 import ContactsList from '~/components/ContactsList.vue';
-import Modal from '@/components/sharedComponents/Modal.vue';
+import Modal from '~/components/Modal.vue';
 import EditContact from '@/components/EditContact.vue';
 import SearchContacts from '@/components/SearchContacts.vue';
+import SortContacts from '@/components/SortContacts.vue';
 
 export default {
     name: 'MainPage',
@@ -32,6 +34,7 @@ export default {
         Modal,
         EditContact,
         SearchContacts,
+        SortContacts,
     },
 
     data() {
