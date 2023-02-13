@@ -4,13 +4,13 @@
         <main class="main">
             <h1 class="title">My contacts</h1>
             <SearchContacts @onSearchInput="inputSearch" />
-            <SortContacts />
+            <SortContacts v-if="!this.$store.getters['searchModeStatus']" />
             <ContactsList :searchList="getSearchList" />
             <Modal>
                 <CreateContact v-if="getCreateContactStatus" />
                 <EditContact v-if="getEditContactStatus" />
             </Modal>
-            <button class="button" @click="onOpenCreateModal()">Create contact</button>
+            <button class="button-create button" @click="onOpenCreateModal()">Create contact</button>
         </main>
     </div>
 </template>
@@ -81,5 +81,13 @@ export default {
 
 .title {
     margin: 10px;
+}
+
+.button-create {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    width: 100px;
+    height: 100px !important;
 }
 </style>

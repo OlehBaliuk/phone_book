@@ -31,6 +31,10 @@ export default {
 
 .button {
     min-width: 30px;
+
+    &.active {
+        color: grey;
+    }
 }
 
 .title {
